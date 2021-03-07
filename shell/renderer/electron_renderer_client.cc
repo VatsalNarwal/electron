@@ -149,6 +149,9 @@ void ElectronRendererClient::DidCreateScriptContext(
   AddRenderBindings(env->isolate(), env->process_object());
   gin_helper::Dictionary process_dict(env->isolate(), env->process_object());
   process_dict.SetReadOnly("isMainFrame", render_frame->IsMainFrame());
+  process_dict.SetReadOnly(
+      "contextIsolation",
+      render_frame->GetBlinkPreferences().context_isolation);
 
   // Load everything.
   node_bindings_->LoadEnvironment(env);
